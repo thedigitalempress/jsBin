@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style4.css">
+    <title>Code Player</title>
+</head>
+
+    <body>
+        
+        <!--Header Section-->
+        <div id="header">
+            <div id="logo">
+                <img class="jsbot" src="img/jsbot.png">
+            
+                <div id="file">File
+                    <img class="arrow" src="img/arrow.png">
+                </div> 
+            </div>
+
+            <div id="addLibrary">Add Library</div>
+            
+
+        <!--Sign Up Section-->
+        <div id="signupContainer">
+            <div class="options" id="loginReg">Login or Register</div>
+
+            <div class="options" id="blog">Blog</div>
+
+            <div class="options" id="help">Help</div>
+        </div>
+        <!--End of SignUp Section-->
+
+
+
+        <!--Button Section-->  
+            <div id="buttonContainer">
+    
+                <div class="toggleButton active" id="html">HTML</div>
+    
+                <div class="toggleButton" id="css">CSS</div>
+    
+                <div class="toggleButton" id="javascript">Javascript</div>
+    
+                <div class="toggleButton" id="console">Console</div>
+    
+                <div class="toggleButton active" id="output">Output</div>
+            </div>
+
+        </div>
+        <!--End of Header Section-->
+
+        <!--Website Content-->
+        <div id="bodyContainer">
+
+            <textarea id="htmlPanel" class="panel"><p>Hello Bitches!</p></textarea>
+
+            <textarea id="cssPanel" class="panel hidden">p {color: green;}</textarea>
+
+            <textarea id="jsPanel" class="panel">alert!("Hi there!");</textarea>
+
+            <textarea id="consolePanel" class="panel hidden">console.log('your message');</textarea>
+
+            <iframe id="outputPanel" class="panel"></iframe>
+        </div>
+        <!--End of Website Content-->
+
+       
+        <script type="text/javascript">
+
+         function updateOutput() {
+                
+                $("iframe").contents().find("html").html("<html><head><style type='text/css'>" + $("#cssPanel").val() + "</style></head><body>" + $("#htmlPanel").val() + "</body></html>");
+                
+                document.getElementById("outputPanel").contentWindow.eval($("#jsPanel").val());
+
+         }    
+        
+        $(".toggleButton").hover(function() {
+
+                $(this).addClass("highlightedButton");
+
+        }, function() {
+
+            $(this).removeClass("highlightedButton");
+
+        });
+
+        $(".toggleButton").click(function() {
+
+            $(this).toggleClass("active");
+
+            $(this).removeClass("highlightedButton");
+
+            var panelId = $(this).attr("id") + "Panel";
+
+            $("#" + panelId).toggleClass("hidden");
+
+            var numberOfActivePanels = 5 - $('.hidden').length;
+
+            $(".panel").width(($(window).width() / numberOfActivePanels) - 15);
+
+        })
+
+        $(".panel").height($(window).height() - $("#header").height() - 15);
+
+        $(".panel").width(($(window).width() / 4) - 10);
+
+            updateOutput();
+
+        $("textarea").on('change keyup paste', function() {
+
+            updateOutput();
+
+        });
+
+        </script>
+    
+    
+    </body>
+</html>
+
+
+
+  
