@@ -4,4 +4,4 @@
 To test skills in Jquery
 
 ### Source
-jsbin.com
+https://www.jsbin.com
